@@ -1,0 +1,6 @@
+{
+  "name": "component-registration",
+  "short_name": "component-registration",
+  "start_url": "/",
+  "display": "standalone"
+}

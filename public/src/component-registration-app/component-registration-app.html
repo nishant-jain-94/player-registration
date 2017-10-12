@@ -1,0 +1,44 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
+
+
+<dom-module id="component-registration-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <paper-toolbar></paper-toolbar>
+    <h1>Register a Player</h1>
+    <paper-input value="{{player.name}}" label="Player Name"></paper-input>
+    <paper-input value="{{player.url}}" label="Player URL"></paper-input>
+    <paper-input value="{{player.selector}}" label="Player Selector"></paper-input>
+    <paper-button on-click="handleRegistration">Register</paper-button>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class ComponentRegistrationApp extends Polymer.Element {
+      static get is() { return 'component-registration-app'; }
+      static get properties() {
+        return {
+          player: {
+            type: Object
+          }
+        };
+      }
+
+      handleRegistration() {
+        
+      }
+    }
+
+    window.customElements.define(ComponentRegistrationApp.is, ComponentRegistrationApp);
+  </script>
+</dom-module>
