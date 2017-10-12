@@ -1,22 +1,64 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
-
+<link rel="import" href="jquery-import.html">
 
 <dom-module id="component-registration-app">
   <template>
     <style>
+      @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
       :host {
         display: block;
+        font-family: 'Roboto', sans-serif;
+      }
+
+      .player-registration-container {
+        background: #000;
+        height: 100%;
+        width: 100%;
+        display: table;
+        overflow: hidden;
+      }
+      .player-registration {
+        color: #f4f4f9;
+        width: 80%;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        font-size: 2.5em;
+        padding-left: 100px;
+        padding-right: 300px;
+        display: table-cell;
+        vertical-align: middle;
+      }
+
+      .input-element {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.2em;        
+        font-weight: 700;
+        display: inline-block;
+        border: none;
+        width: auto;
+        background: #000;
+      }
+
+      .btn {
+        background-color: white;
+        color: black;
       }
     </style>
-    <paper-toolbar></paper-toolbar>
-    <h1>Register a Player</h1>
-    <paper-input value="{{player.name}}" label="Player Name"></paper-input>
-    <paper-input value="{{player.url}}" label="Player URL"></paper-input>
-    <paper-input value="{{player.selector}}" label="Player Selector"></paper-input>
-    <paper-button on-click="handleRegistration">Register</paper-button>
+    <div class="player-registration-container">
+      <div class="player-registration">
+        <h4>Player Registration</h4>
+        <p>Hey,</p>
+        <p>
+        I want to register a player of type
+        <span class="input-element" contenteditable="true">{{player.type}}</span> with name
+        <span class="input-element" text-content="{{player.name::input}}" contenteditable="true">Player Name</span> which can be found at 
+        <span class="input-element" text-content="{{player.url::input}}" contenteditable="true">Player Url</span> and can be used using this
+        <span class="input-element" text-content="{{player.selector::input}}" contenteditable="true">Player Selector</span> selector.
+        </p>
+        <paper-button class="btn" raised on-click="handleRegistration">Register</paper-button>
+      </div>
+    </div>
   </template>
 
   <script>
@@ -26,16 +68,30 @@
      */
     class ComponentRegistrationApp extends Polymer.Element {
       static get is() { return 'component-registration-app'; }
-      static get properties() {
-        return {
-          player: {
-            type: Object
-          }
+      constructor() {
+        super();
+        this.player = {
+          type: 'Player-Type',
+          name: 'Player-Name',
+          url: 'Player-Url',
+          selector: '<player-selector>'
         };
       }
-
       handleRegistration() {
-        
+        $.ajax({
+          url: 'http://localhost:8080/player',
+          method: 'POST',
+          data: this.player,
+          success: (response) => {
+            console.log(response);
+            this.player = {
+              type: 'Player-Type',
+              name: 'Player-Name',
+              url: 'Player-Url',
+              selector: '<player-selector>'
+            }
+          }
+        });
       }
     }
 

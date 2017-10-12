@@ -5,7 +5,9 @@
     "polymer": "Polymer/polymer#^2.0.0",
     "paper-input": "PolymerElements/paper-input#^2.0.2",
     "paper-button": "PolymerElements/paper-button#^2.0.0",
-    "paper-toolbar": "PolymerElements/paper-toolbar#^2.0.0"
+    "paper-toolbar": "PolymerElements/paper-toolbar#^2.0.0",
+    "iron-input": "^2.0.1",
+    "jquery": "^3.2.1"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",
