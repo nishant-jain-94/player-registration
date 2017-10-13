@@ -7,7 +7,8 @@
     "paper-button": "PolymerElements/paper-button#^2.0.0",
     "paper-toolbar": "PolymerElements/paper-toolbar#^2.0.0",
     "iron-input": "^2.0.1",
-    "jquery": "^3.2.1"
+    "jquery": "^3.2.1",
+    "paper-toast": "^2.0.0"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",

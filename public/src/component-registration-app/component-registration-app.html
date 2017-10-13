@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="jquery-import.html">
 
 <dom-module id="component-registration-app">
@@ -21,6 +22,7 @@
       .player-registration {
         color: #f4f4f9;
         width: 80%;
+        overflow-y:hidden;
         font-family: 'Roboto', sans-serif;
         font-weight: 300;
         font-size: 2.5em;
@@ -44,6 +46,11 @@
         background-color: white;
         color: black;
       }
+
+      #toast {
+        --paper-toast-background-color: white;
+        --paper-toast-color: black;
+      }
     </style>
     <div class="player-registration-container">
       <div class="player-registration">
@@ -52,11 +59,12 @@
         <p>
         I want to register a player of type
         <span class="input-element" contenteditable="true">{{player.type}}</span> with name
-        <span class="input-element" text-content="{{player.name::input}}" contenteditable="true">Player Name</span> which can be found at 
-        <span class="input-element" text-content="{{player.url::input}}" contenteditable="true">Player Url</span> and can be used using this
-        <span class="input-element" text-content="{{player.selector::input}}" contenteditable="true">Player Selector</span> selector.
+        <span class="input-element" contenteditable="true">{{player.name}}</span> which can be found at 
+        <span class="input-element" contenteditable="true">{{player.url}}</span> and can be used using this
+        <span class="input-element" contenteditable="true">{{player.selector}}</span> selector.
         </p>
         <paper-button class="btn" raised on-click="handleRegistration">Register</paper-button>
+        <paper-toast id="toast" text="Player Registered"></paper-toast>
       </div>
     </div>
   </template>
@@ -84,6 +92,7 @@
           data: this.player,
           success: (response) => {
             console.log(response);
+            this.$.toast.open();
             this.player = {
               type: 'Player-Type',
               name: 'Player-Name',
