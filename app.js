@@ -15,7 +15,7 @@ app.get('/ping', (req, res) => {
 });
 
 app.get('/player', (req, res) => {
-  res.json(player);
+  res.json(players);
 });
 
 app.post('/player',(req, res) => {
