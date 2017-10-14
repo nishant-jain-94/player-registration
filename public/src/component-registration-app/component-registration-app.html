@@ -60,7 +60,7 @@
         I want to register a player of type
         <span class="input-element" contenteditable="true">{{player.type}}</span> with name
         <span class="input-element" contenteditable="true">{{player.name}}</span> which can be found at 
-        <span class="input-element" contenteditable="true">{{player.url}}</span> and can be used using this
+        <span class="input-element" contenteditable="true">{{player.repo}}</span> and can be used using this
         <span class="input-element" contenteditable="true">{{player.selector}}</span> selector.
         </p>
         <paper-button class="btn" raised on-click="handleRegistration">Register</paper-button>
@@ -81,7 +81,7 @@
         this.player = {
           type: 'Player-Type',
           name: 'Player-Name',
-          url: 'Player-Url',
+          repo: 'Player-Repo',
           selector: '<player-selector>'
         };
       }
@@ -96,7 +96,7 @@
             this.player = {
               type: 'Player-Type',
               name: 'Player-Name',
-              url: 'Player-Url',
+              repo: 'Player-Repo',
               selector: '<player-selector>'
             }
           }

@@ -14,8 +14,13 @@ app.get('/ping', (req, res) => {
   res.send('pong');
 });
 
-app.get('/player', (req, res) => {
+app.get('/players', (req, res) => {
   res.json(players);
+});
+
+app.get('/players/repo', (req, res) => {
+  const listOfPlayersRepository = players.map((player) => player.repo)
+  res.json(listOfPlayersRepository);
 });
 
 app.post('/player',(req, res) => {
