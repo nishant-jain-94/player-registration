@@ -5,6 +5,7 @@ const app = express();
 
 const players = [];
 
+app.set('port', process.env.port || 8080);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -23,4 +24,6 @@ app.post('/player',(req, res) => {
 });
 
 
-app.listen(8080);
+app.listen(app.get('port'), () => {
+  console.log(`Player Registration listening on port ${app.get('port')}`);
+});
