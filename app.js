@@ -5,7 +5,7 @@ const app = express();
 
 const players = [];
 
-app.set('port', process.env.port || 8080);
+app.set('port', process.env.PORT || 8080);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
