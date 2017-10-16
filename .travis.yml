@@ -3,6 +3,8 @@ node_js:
 - stable
 install:
 - npm install bower
+- echo "AUTHORIZATION_TOKEN= ${echo $AUTHORIZATION_TOKEN}" >> player-registration.env
+- less player-registration.env
 deploy:
   app: morning-peak-73646
   provider: heroku
