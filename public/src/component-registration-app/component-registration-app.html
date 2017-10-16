@@ -58,10 +58,10 @@
         <p>Hey,</p>
         <p>
         I want to register a player of type
-        <span class="input-element" contenteditable="true">{{player.type}}</span> with name
-        <span class="input-element" contenteditable="true">{{player.name}}</span> which can be found at 
-        <span class="input-element" contenteditable="true">{{player.repo}}</span> and can be used using this
-        <span class="input-element" contenteditable="true">{{player.selector}}</span> selector.
+        <span class="input-element" text-content="{{player.type::input}}" contenteditable="true">{{player.type}}</span> with name
+        <span class="input-element" text-content="{{player.name::input}}" contenteditable="true">{{player.name}}</span> which can be found at 
+        <span class="input-element" text-content="{{player.repo::input}}" contenteditable="true">{{player.repo}}</span> and can be used using this
+        <span class="input-element" text-content="{{player.selector::input}}" contenteditable="true">{{player.selector}}</span> selector.
         </p>
         <paper-button class="btn" raised on-click="handleRegistration">Register</paper-button>
         <paper-toast id="toast" text="Player Registered"></paper-toast>
