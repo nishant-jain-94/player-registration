@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+- stable
+install:
+- npm install bower
+deploy:
+  app: morning-peak-73646
+  provider: heroku
+  api_key:
+    secure: QNNJpCrE4Lbql5oAOC4SOHO6Ifj78XlMCsYnVG/I6jA5PHiiXMNNOCmopCLQbKQvzBlcwPPA3oELlMAasHW0Sc8GZ/2R8CwUi/SeEdQ9QcE0bwQVEsMHLhC3XRVuPvfxggRHxn/P1TnIdJ5DQ4duOHiRqX424C9bjxqRS9pRGTSdfQhpIAJ/GkuErP3Kv7Mr7EckTcxCG1MTZ1pOVVO1h/fDN5aMle4IrUkTnR1pXkksCASKeYuKlZduHtzzx/H5/2jQyJ72AL2JEigsgNYbBqdgZvB74j9qEvMve/VUA/hV7YxUhGBDfHxHusM2wXXNzk+rZ8SLh4Vjo2DT4GYwbqQ7DsJcgc9OmKD2mOdWLUM+OhKvtHR6gLLd6qm8yMspMD0KuGplHB1dgC8PhdY8TL2ehCRQk5xXWHSIy8OvDclwn7n67ewZrZT2ZwXM3DkFD/aXMAZstBeZ0yc4J73zwgs2hdAt6iICTOd3ZTTMyLySqwL9xENW70SuzMAjpJtaaunlVGSxzqXhhwLAoh+ucJNsmAe1IZbiErF+loy2C2kO2pKp0Fk+/yPin6uSL+pUCrzUGyQGzSdooacn+QyzEEkapxAXvJ3iu9Cb58eVxZp8izU/TofsUr82t7hQYrrD+djYiq5en0crBC/9fX3EacdlPgFR6zJTk57/aAcrecU=
+  strategy: api
+  skip_cleanup: true
