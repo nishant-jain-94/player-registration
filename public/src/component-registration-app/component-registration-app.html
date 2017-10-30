@@ -5,31 +5,36 @@
 
 <dom-module id="component-registration-app">
   <template>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">    
     <style>
-      @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
       :host {
         display: block;
-        font-family: 'Roboto', sans-serif;
+        /* font-family: 'Roboto', sans-serif; */
       }
-
+      span[contenteditable=true]:empty:before {
+        content: attr(placeholder);
+      }
+      span[contenteditable=true] {
+        border-bottom: 1px dashed whitesmoke;
+      }
       .player-registration-container {
-        background: #000;
         height: 100%;
         width: 100%;
         display: table;
         overflow: hidden;
+        background: #000;
       }
       .player-registration {
         color: #f4f4f9;
         width: 80%;
         overflow-y:hidden;
-        font-family: 'Roboto', sans-serif;
-        font-weight: 300;
-        font-size: 2.5em;
-        padding-left: 100px;
-        padding-right: 300px;
+        font-size: 2.3em;
         display: table-cell;
+        padding-left: 100px;
+        font-weight: lighter;
+        padding-right: 300px;
         vertical-align: middle;
+        font-family: 'Lato', sans-serif;
       }
 
       .input-element {
@@ -45,9 +50,10 @@
       .btn {
         background-color: white;
         color: black;
+        font-size: 0.6em;
       }
 
-      #toast {
+      .toast {
         --paper-toast-background-color: white;
         --paper-toast-color: black;
       }
@@ -57,14 +63,16 @@
         <h4>Player Registration</h4>
         <p>Hey,</p>
         <p>
-        I want to register a player of type
-        <span class="input-element" text-content="{{player.type::input}}" contenteditable="true">{{player.type}}</span> with name
-        <span class="input-element" text-content="{{player.name::input}}" contenteditable="true">{{player.name}}</span> which can be found at 
-        <span class="input-element" text-content="{{player.repo::input}}" contenteditable="true">{{player.repo}}</span> and can be used using this
-        <span class="input-element" text-content="{{player.selector::input}}" contenteditable="true">{{player.selector}}</span> selector.
+        I want to register a player for the question type
+        <span class="input-element" text-content="{{player.questionType::input}}" placeholder="Question Type" contenteditable=true></span> with name
+        <span class="input-element" text-content="{{player.name::input}}" placeholder="Player-Name" contenteditable=true></span> which can be found at 
+        <span class="input-element" text-content="{{player.repo::input}}" placeholder="Player-Repo" contenteditable=true></span> and can be used using this
+        <span class="input-element" text-content="{{player.selector::input}}" placeholder="Player-Prefix" contenteditable=true></span> prefix.
         </p>
         <paper-button class="btn" raised on-click="handleRegistration">Register</paper-button>
-        <paper-toast id="toast" text="Player Registered"></paper-toast>
+        <paper-toast class="toast" id="successToast" text="Player Registered"></paper-toast>
+        <paper-toast class="toast" id="errorToast" text="Player Registeration failed. Please try again."></paper-toast>
+        <paper-toast class="toast" id="invalidToast" text="Invalid Player Details. Fix it and try again."></paper-toast>        
       </div>
     </div>
   </template>
@@ -79,28 +87,45 @@
       constructor() {
         super();
         this.player = {
-          type: 'Player-Type',
-          name: 'Player-Name',
-          repo: 'Player-Repo',
-          selector: '<player-selector>'
+          questionType: '',
+          name: '',
+          repo: '',
+          selector: ''
         };
       }
       handleRegistration() {
-        $.ajax({
-          url: 'player',
-          method: 'POST',
-          data: this.player,
-          success: (response) => {
-            console.log(response);
-            this.$.toast.open();
-            this.player = {
-              type: 'Player-Type',
-              name: 'Player-Name',
-              repo: 'Player-Repo',
-              selector: '<player-selector>'
+        const valid = this._isPlayerValid();
+        if(valid) {
+          $.ajax({
+            url: 'player',
+            method: 'POST',
+            data: this.player,
+            success: (response) => {
+              this.$.successToast.open();
+              this.player = {
+                questionType: '',
+                name: '',
+                repo: '',
+                selector: ''
+              }
+            },
+            error: (error) => {
+              this.$.errorToast.open();
             }
+          });
+        } else {
+          this.$.invalidToast.open();
+        }
+      }
+      _isPlayerValid() {
+        let valid = false;
+        if (this.player.questionType !== ''
+           || this.player.name !== ''
+           || this.player.repo !== ''
+           || this.player.selector !== '') {
+            valid = true;
           }
-        });
+        return valid;
       }
     }
 
